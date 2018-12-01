@@ -2,8 +2,10 @@ package com.zhoujin.chanpin.controller;
 
 
 import com.zhoujin.commons.entity.User;
-import com.zhoujin.chanpin.service.UserService;
+import com.zhoujin.chanpin.service.UserServiceApi;
+import com.zhoujin.commons.wrapperutil.Wrapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,9 +17,15 @@ public class ProductController {
 
 /*    @Autowired
     private RestTemplate restTemplate;*/
+    @Value("chanpinkey1")
+    private String key1;
+    @Value("chanpinkey2")
+    private String key2;
+    @Value("chanpinkey3")
+    private String key3;
 
     @Autowired
-    private UserService userservice;
+    private UserServiceApi userservice;
 
     @GetMapping("/chanpin/ribbon")
     public List<User> testRibbon() {
@@ -29,8 +37,10 @@ public class ProductController {
             //user = restTemplate.getForObject("http://USER/user/"+(i+1), UserPo.class);
             Long id = Long.valueOf((i + 1));
             //user = restTemplate.getForObject("http://YONGHU/user/" + (i + 1), User.class);
-            user=userservice.getUser(id);
-            list.add(user);
+            Wrapper<User> userWrapper = userservice.getUser(id);
+            if(userWrapper.success()) {
+                list.add(userWrapper.getResult());
+            }
         }
         return list;
     }
@@ -41,7 +51,12 @@ public class ProductController {
     }
 
     @GetMapping("/chanpin/timeout")
-    public String timeout(){
+    public Wrapper<String> timeout(){
         return  userservice.timeout();
+    }
+
+    @GetMapping("/chanpin/config")
+    public String config(){
+        return "key1="+key1+"   key2="+key2+"   key3="+key3;
     }
 }

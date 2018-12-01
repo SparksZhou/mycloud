@@ -32,6 +32,7 @@
 		<module>yonghu_api</module>
 		<module>dashboard</module>
 		<module>zuul</module>
+		<module>configuration</module>
 	</modules>
 
 	<dependencies>
