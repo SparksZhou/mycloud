@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.zhoujin</groupId>
-	<artifactId>server1</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>chanpin</artifactId>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
 	<name>server1</name>
@@ -15,7 +15,7 @@
 		<groupId>com.zhoujin</groupId>
 		<artifactId>mycloud</artifactId>
 		<version>1.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<properties>
@@ -41,6 +41,7 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>com.zhoujin</groupId>
 			<artifactId>commons</artifactId>
@@ -56,6 +57,21 @@
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
 
+		<!-- feign 声明过程调用-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<!-- hystrix熔断-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.zhoujin</groupId>
+			<artifactId>commons</artifactId>
+			<version>1.0</version>
+		</dependency>
 
 	</dependencies>
 
@@ -80,16 +96,7 @@
 		</plugins>
 	</build>
 
-	<repositories>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
+
 
 
 </project>
